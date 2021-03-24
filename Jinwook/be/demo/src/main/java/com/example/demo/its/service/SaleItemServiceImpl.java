@@ -1,47 +1,77 @@
 package com.example.demo.its.service;
 
 import java.util.List;
+import java.util.Optional;
 
-import com.example.demo.its.domain.SaleItemDto;
-import com.example.demo.its.repository.SaleItemRepositoryImpl;
+import com.example.demo.cmm.service.AbstractService;
+import com.example.demo.its.domain.SaleItem;
+import com.example.demo.its.domain.SaleItem;
+import com.example.demo.its.repository.SaleItemRepository;
 
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class SaleItemServiceImpl implements SaleItemService {
+public class SaleItemServiceImpl extends AbstractService<SaleItem> implements SaleItemService {
 
-    private final SaleItemRepositoryImpl repo;
-
-    @Override
-    public void register(SaleItemDto saleItemDto) throws Exception {
-        repo.create(saleItemDto);
-
-    }
+    private final SaleItemRepository repo;
 
     @Override
-    public SaleItemDto read(Long itemNo) throws Exception {
+    public Optional<SaleItem> findOne(Example<SaleItem> example) {
         // TODO Auto-generated method stub
-        return repo.read(itemNo);
+        return repo.findOne(example);
     }
 
     @Override
-    public void modify(SaleItemDto saleItemDto) throws Exception {
-        repo.modify(saleItemDto);
-
-    }
-
-    @Override
-    public SaleItemDto delete(Long itemNo) throws Exception {
+    public long count() {
         // TODO Auto-generated method stub
-        return repo.delete(itemNo);
+        return repo.count();
     }
 
     @Override
-    public List<SaleItemDto> list() throws Exception {
+    public void deleteById(long id) {
         // TODO Auto-generated method stub
-        return repo.list();
+        repo.deleteById(id);
+
     }
+
+    @Override
+    public boolean existsById(long id) {
+        // TODO Auto-generated method stub
+        return repo.existsById(id);
+    }
+
+    @Override
+    public Optional<SaleItem> findById(long id) {
+        // TODO Auto-generated method stub
+        return repo.findById(id);
+    }
+
+    @Override
+    public List<SaleItem> findAll() {
+        // TODO Auto-generated method stub
+        return repo.findAll();
+    }
+
+    @Override
+    public List<SaleItem> findAllById(Iterable<Long> ids) {
+        // TODO Auto-generated method stub
+        return repo.findAllById(ids);
+    }
+
+    @Override
+    public SaleItem save(SaleItem entity) {
+        // TODO Auto-generated method stub
+        return repo.save(entity);
+    }
+
+    @Override
+    public SaleItem getOne(long id) {
+        // TODO Auto-generated method stub
+        return repo.getOne(id);
+    }
+
 }
