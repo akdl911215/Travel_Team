@@ -1,17 +1,15 @@
 package com.example.demo.fds.controller;
 
-import com.example.demo.fds.service.FeedService;
+import java.util.List;
 
-import org.apache.http.HttpStatus;
+import com.example.demo.fds.domain.Feeds;
+import com.example.demo.fds.service.FeedsBoardServiceImpl;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import jdk.internal.jline.internal.Log;
 
@@ -20,74 +18,48 @@ import jdk.internal.jline.internal.Log;
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class FeedsBoardController {
 
-    private final FeedService  Service;
+    private final FeedsBoardServiceImpl service;
 
-    @GetMapping(value = "/{boardNo}", method = RequestMethod.GET)
-    public ResponseEntity<FeedsBoard> read(
-        @PathVariable("boardNo") Long boardNo) throws Exception {
+    @RequestMapping(value = "/{feedNo}")
+    public ResponseEntity<Feeds> read(
+        @RequestBody Feeds feeds) throws Exception {
 
-            log.info("FeedsBoard read()");
+            Log.info("Feeds read()");
 
-            FeedsBoard board = service.read(BoardNo);
-
-            return new ResponseEntity<FeedsBoard>(board, HttpStatus.OK);
+            return null;
         }
 
-    @GetMapping(value = "", method = RequestMethod.GET)
-    pulbic ResponseEntity<List<FeedsBoard>> list() throws Exception {
-        Log.info("FeedsBoard list()");
+    @RequestMapping(value = "")
+    public ResponseEntity<List<Feeds>>list() throws Exception {
+        Log.info("Feeds list()");
 
-        return new ResponseEntity<> (
-            service.list(), HttpStatus.OK);
+        return null;
     }
 
-    @GetMapping(values = "", method = RequestMethod.POST)
-    public ResponseEntity<FeedsBoard> register(
-                @Validated @RequestBody FeedsBoard board,
-                UriComponentsBuilder uriBuider) throws Exception {
+    @RequestMapping(value = "")
+    public ResponseEntity<Feeds> register(
+               @RequestBody Feeds feeds) throws Exception {
 
-            Log.info(FeedsBoard register);
+        Log.info("Feeds register");
 
-            service.register(board);
+        return null;
+    }
 
-            log.info("Register bpard.getFeedsNo() = " + board.getFeedsNo());
-                    
-            return new ResponseEntity<>(board, HttpStatus.OK);
-        }
-
-    @GetMapping(value = "/{boardNo}", method = RequestMapping.DELETE)
+    @RequestMapping(value = "")
     public ResponseEntity<Void> remove(
-                @PathVariable("boardNo") Long boardNo) throws Exception {
+             @RequestBody Feeds feeds) throws Exception {
 
-                    Log.info("remove");
+         Log.info("remove");
 
-                    service.remove(boardNo);
+        return null;
+    }
 
-                    return new ResponseEntity<void>(HttpStatus.NO_CONETENT);
+    @RequestMapping(value = "")
+    public ResponseEntity<Feeds> modify(
+        @RequestBody Feeds feeds) throws Exception {
         
-        }
+        Log.info("modify");
 
-    @GetMapping(value = "/{boardNo}", method = RequestMethod.PUT)
-    public ResponseEntity<FeedsBoard> modify(
-                @PathVariable("boardNo") Long boardNo) throws Exception {
-
-            Log.info("remove");
-
-            service.remove(boardNo);
-
-            return new ResponseEntity<Void>(HttpStatus.SC_NO_CONTENT);
-        }
-
-    @GetMapping(value = "/{boardNo}", method = RequestMethod.PUT)
-    public ResponseEntity<FeedsBoard> modify(
-                @PathVariable("boardNo") Long boardNO,
-                @Validated @RequestBody FeedsBoard board) throws Exception {
-        
-        log.info("modify");
-
-        board.setBoardNo(boardNo);
-        service.modify(board);
-
-        return new ResponseEntity<>(board, HttpStatus.OK);
+        return null;
     }
 }

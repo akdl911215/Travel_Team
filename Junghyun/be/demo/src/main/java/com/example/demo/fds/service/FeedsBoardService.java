@@ -1,11 +1,13 @@
 package com.example.demo.fds.service;
 
-import com.example.demo.fds.domain.FeedDto;
+import java.util.List;
+
+import com.example.demo.fds.domain.Feeds;
 
 public interface FeedsBoardService {
-    public void register(FeedsDto board) throws Exception;
-    public FeedsBoard read(Long boardNo) throws Exception;
-    public void modify(FeedsDto board) throws Exception;
-    public void remove(Long boardNo) throws Exception;
-    public List<FeedsDto> list() throws Exception;
+    public void register(Feeds feed) throws Exception;
+    public Feeds read(Long feed) throws Exception;
+    public void modify(Feeds feed) throws Exception;
+    public void remove(Long feedsNo) throws Exception;
+    public List<Feeds> list() throws Exception;
 }

@@ -1,43 +1,61 @@
 package com.example.demo.fds.service;
 
+import java.util.List;
+import java.util.Optional;
+
+import com.example.demo.cmm.service.AbstractService;
+import com.example.demo.fds.domain.Feeds;
 import com.example.demo.fds.repository.FeedsBoardRepository;
 
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
-import jdk.jfr.DataAmount;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Service
-public class FeedsBoardServiceImpl implements FeedsBoardService {
+public class FeedsBoardServiceImpl extends AbstractService<Feeds> implements FeedsBoardService {
 
     private final FeedsBoardRepository fBoardRepo;
 
     @Override
-    public List<FeedsDto> list() throws Exception {
-        return fBoardRepo.list();
+    public long count() {
+        return fBoardRepo.count();
     }
 
     @Override
-    public void modify(FeedsDto board) throws Exception {
-        fBoardRepo.update(board);
+    public boolean existsById(long id) {
+        return fBoardRepo.existsById(id);
+    }
+
+    // return null
+    @Override
+    public List<Feeds> findAll() {
+        return null;
+    }
+
+    // return null
+    @Override
+    public Optional<Feeds> findOne() {
+        return null;
     }
 
     @Override
-    public FeedsBoard read(Long boardNo) throws Exception {
-        return fBoardRepo.read(boardNo);
+    public void deleteById(long id) {
+
     }
 
     @Override
-    public void register(FeedsDto board) throws Exception {
-        fBoardRepo.create(board);
+    public Feeds getOne(long id) {
+        return fBoardRepo.getOne(id);
     }
 
     @Override
-    public void remove(Long boardNo) throws Exception {
-        fBoardRepo.delete(boardNo);
+    public Feeds save(Feeds entity) {
+        return fBoardRepo.save(entity);
     }
 
 }

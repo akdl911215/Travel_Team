@@ -2,6 +2,9 @@ package com.example.demo.fds.domain;
 
 import javax.persistence.*;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "feeds")
 public class Feeds {
