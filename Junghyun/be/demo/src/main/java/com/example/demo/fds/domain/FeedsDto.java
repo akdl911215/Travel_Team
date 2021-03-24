@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Component
 @Data
-public class FeedDto implements Serializable {
+public class FeedsDto implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private long feedNo;
