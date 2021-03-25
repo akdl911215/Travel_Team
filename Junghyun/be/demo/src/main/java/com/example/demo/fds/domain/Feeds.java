@@ -2,10 +2,13 @@ package com.example.demo.fds.domain;
 
 import javax.persistence.*;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "feeds")
 public class Feeds {
     @Id
@@ -23,4 +26,5 @@ public class Feeds {
     private String addLocation;
     @Column(name = "hash_tag")
     private String hashTag;
+
 }

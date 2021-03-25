@@ -28,4 +28,34 @@ public interface FeedsBoardRepository extends JpaRepository<Feeds, Long>,
                    @Param("hashTag")String FeedsDto.getHashTag());
     }
 
+    @Query("SELECT title, writer, content, add_location, hash_tag FROM feeds")
+    public void read(FeedsDto FeedsDto) throws Exception {
+        System.out.println("create()");
+        Update(@Param("title")String FeedsDto.getTitle(),
+                   @Param("writer")String FeedsDto.getWriter(),
+                   @Param("content")String FeedsDto.getContent(),
+                   @Param("addLocation")String FeedsDto.getAddLocation(),
+                   @Param("hashTag")String FeedsDto.getHashTag());
+    }
+
+    @Query("")
+    public void delete(FeedsDto FeedsDto) throws Exception {
+        System.out.println("create()");
+        Update(@Param("title")String FeedsDto.getTitle(),
+                   @Param("writer")String FeedsDto.getWriter(),
+                   @Param("content")String FeedsDto.getContent(),
+                   @Param("addLocation")String FeedsDto.getAddLocation(),
+                   @Param("hashTag")String FeedsDto.getHashTag());
+    }
+
+    @Query("")
+    public void update(FeedsDto FeedsDto) throws Exception {
+        System.out.println("create()");
+        Update(@Param("title")String FeedsDto.getTitle(),
+                   @Param("writer")String FeedsDto.getWriter(),
+                   @Param("content")String FeedsDto.getContent(),
+                   @Param("addLocation")String FeedsDto.getAddLocation(),
+                   @Param("hashTag")String FeedsDto.getHashTag());
+    }
+
 }  
