@@ -24,9 +24,6 @@ interface SaleItemCustomRepository {
     @Query(value = "SELECT title, writer, hashTag, itemPicture, content, price, regDate FROM SaleItem its WHERE its.itemNo= :itemNo")
     SaleItem read(@Param("itemNo") long itemNo);
 
-    @Query(value = "SELECT its FROM SaleItem its WHERE its.itemNo > 0 ORDER BY its.itemNo desc, its.regDate desc")
-    List<SaleItem> list();
-
     @Modifying
     @Query("delete its FROM SaleItem its WHERE its.itemNo= :itemNo")
     void remove(@Param("itemNo") long itemNo);
@@ -35,4 +32,14 @@ interface SaleItemCustomRepository {
 @Repository
 public interface SaleItemRepository extends JpaRepository<SaleItem, Long>, SaleItemCustomRepository {
 
+    public SaleItem findbyHashTag(String hashTag);
+
+    public List<SaleItem> findAllbyItmeNo(Long itemNo);
+
+    @Query(value = "SELECT * FROM SaleItem GROUP BY soldOut", nativeQuery = true)
+    public List<SaleItem> groupListBySoldOut(Boolean soldOut);
+
+    void deleteById(Long itemNo);
+
+    public SaleItem save(SaleItem saleItem);
 }
