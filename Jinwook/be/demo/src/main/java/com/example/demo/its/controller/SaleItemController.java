@@ -34,43 +34,11 @@ public class SaleItemController {
 
     private final SaleItemServiceImpl service;
 
-    @GetMapping("/{itemNo}")
-    public ResponseEntity<SaleItem> read(@PathVariable("itemNo") Long itemNo) throws Exception {
-        println.accept("read()");
-
-        SaleItem saleItem = service.read(itemNo);
-
-        return new ResponseEntity<SaleItem>(saleItem, HttpStatus.OK);
-    }
-
-    @GetMapping("")
-    public ResponseEntity<List<SaleItem>> list() throws Exception {
-        println.accept("list()");
-        return new ResponseEntity<>(service.list(), HttpStatus.OK);
-    }
-
     @PostMapping("/register")
     public ResponseEntity<SaleItem> register(@RequestBody SaleItemDto saleItem) throws Exception {
         println.accept("POST register()");
-        service.save(saleItem);
+        service.register(saleItem);
 
         return new ResponseEntity<>(saleItem, HttpStatus.OK);
-    }
-
-    @PutMapping("/{itemNo}")
-    public ResponseEntity<SaleItem> modify(@PathVariable("itemNo") Long itemNo,
-            @Validated @RequestBody SaleItemDto saleItem) throws Exception {
-        println.accept("POST modify()");
-        service.
-
-        return new ResponseEntity<>(saleItem, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{itemNo}")
-    public ResponseEntity<Void> remove(@PathVariable("itemNo") Long itemNo) throws Exception {
-        println.accept("remove");
-        service.remove(itemNo);
-
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 }

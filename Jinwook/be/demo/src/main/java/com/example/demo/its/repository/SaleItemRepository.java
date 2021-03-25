@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.example.demo.its.domain.SaleItem;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,11 +11,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 interface SaleItemCustomRepository {
-
-}
-
-@Repository
-public interface SaleItemRepository extends JpaRepository<SaleItem, Long>, SaleItemCustomRepository {
+    @Modifying
+    @Query(value = "insert into SaleItem (title, writer, hashTag, itemPicture, content, soldOut) values(:title, :writer, :hashTag, :itemPicture, :content, :soldOut)", nativeQuery = true)
+    void create(@Param("title") String title, @Param("writer") String writer, @Param("hashTag") String hashTag,
+            @Param("itemPicture") String itemPicture, @Param("content") String content,
+            @Param("soldOut") String soldOut);
 
     @Modifying
     @Query("update SaleItem set title = :#{#parmaSale.title},writer = :#{#parmaSale.writer}, hashTag = :#{#parmaSale.hashTag},itemPicture = :#{#parmaSale.itemPicture}, content = :#{#parmaSale.content}, soldOut = :#{#saleItem.soldOut} ")
@@ -31,4 +30,9 @@ public interface SaleItemRepository extends JpaRepository<SaleItem, Long>, SaleI
     @Modifying
     @Query("delete its FROM SaleItem its WHERE its.itemNo= :itemNo")
     void remove(@Param("itemNo") long itemNo);
+}
+
+@Repository
+public interface SaleItemRepository extends JpaRepository<SaleItem, Long>, SaleItemCustomRepository {
+
 }

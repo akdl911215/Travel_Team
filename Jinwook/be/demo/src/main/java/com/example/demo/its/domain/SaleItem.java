@@ -8,11 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Entity
+@Getter
 @Table(name = "sale_items")
 public class SaleItem {
 
