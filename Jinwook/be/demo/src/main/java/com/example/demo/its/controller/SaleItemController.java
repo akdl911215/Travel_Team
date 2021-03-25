@@ -9,8 +9,11 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +21,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import static com.example.demo.cmm.util.proxy.*;
 
+import java.util.List;
+
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.asm.Advice.Return;
 
 @RestController
 @RequestMapping("/saleItems")
@@ -28,12 +34,43 @@ public class SaleItemController {
 
     private final SaleItemServiceImpl service;
 
+    @GetMapping("/{itemNo}")
+    public ResponseEntity<SaleItem> read(@PathVariable("itemNo") Long itemNo) throws Exception {
+        println.accept("read()");
+
+        SaleItem saleItem = service.read(itemNo);
+
+        return new ResponseEntity<SaleItem>(saleItem, HttpStatus.OK);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<SaleItem>> list() throws Exception {
+        println.accept("list()");
+        return new ResponseEntity<>(service.list(), HttpStatus.OK);
+    }
+
     @PostMapping("/register")
-    public ResponseEntity<SaleItem> register(@Validated @RequestBody SaleItem saleItem,
-            UriComponentsBuilder uriComponentsBuilder) throws Exception {
+    public ResponseEntity<SaleItem> register(@RequestBody SaleItemDto saleItem) throws Exception {
         println.accept("POST register()");
-        println.accept("register saleItemDto.getBoardNo() = " + saleItem.getItemNo());
+        service.save(saleItem);
 
         return new ResponseEntity<>(saleItem, HttpStatus.OK);
+    }
+
+    @PutMapping("/{itemNo}")
+    public ResponseEntity<SaleItem> modify(@PathVariable("itemNo") Long itemNo,
+            @Validated @RequestBody SaleItemDto saleItem) throws Exception {
+        println.accept("POST modify()");
+        service.
+
+        return new ResponseEntity<>(saleItem, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{itemNo}")
+    public ResponseEntity<Void> remove(@PathVariable("itemNo") Long itemNo) throws Exception {
+        println.accept("remove");
+        service.remove(itemNo);
+
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 }

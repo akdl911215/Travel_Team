@@ -4,10 +4,14 @@ import java.io.Serializable;
 
 import org.springframework.stereotype.Component;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Component
-@Data
+@Getter
+@Setter
 public class SaleItemDto implements Serializable {
     private static final long serialVersionUID = 1L;
 

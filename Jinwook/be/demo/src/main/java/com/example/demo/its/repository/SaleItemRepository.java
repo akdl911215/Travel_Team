@@ -4,17 +4,31 @@ import java.util.List;
 
 import com.example.demo.its.domain.SaleItem;
 
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 interface SaleItemCustomRepository {
-    @Query("insert into sale_items(title, writer, hash_tag, item_picture, content, price "
-            + "values(title :title AND writer :writer AND hash_tag :hashTag AND item_picture :itemPicture AND content :content AND price :price)")
-    public void create(@Param("title") String title, @Param("writer") String writer, @Param("hashTag") String hashTag,
-            @Param("itemPicture") String itemPicture, @Param("content") String content, @Param("price") String price);
+
 }
 
+@Repository
 public interface SaleItemRepository extends JpaRepository<SaleItem, Long>, SaleItemCustomRepository {
 
+    @Modifying
+    @Query("update SaleItem set title = :#{#parmaSale.title},writer = :#{#parmaSale.writer}, hashTag = :#{#parmaSale.hashTag},itemPicture = :#{#parmaSale.itemPicture}, content = :#{#parmaSale.content}, soldOut = :#{#saleItem.soldOut} ")
+    void modify(@Param("parmaSale") SaleItem saleItem);
+
+    @Query(value = "SELECT title, writer, hashTag, itemPicture, content, price, regDate FROM SaleItem its WHERE its.itemNo= :itemNo")
+    SaleItem read(@Param("itemNo") long itemNo);
+
+    @Query(value = "SELECT its FROM SaleItem its WHERE its.itemNo > 0 ORDER BY its.itemNo desc, its.regDate desc")
+    List<SaleItem> list();
+
+    @Modifying
+    @Query("delete its FROM SaleItem its WHERE its.itemNo= :itemNo")
+    void remove(@Param("itemNo") long itemNo);
 }
