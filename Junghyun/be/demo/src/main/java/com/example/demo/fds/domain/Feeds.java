@@ -26,5 +26,6 @@ public class Feeds {
     private String addLocation;
     @Column(name = "hash_tag")
     private String hashTag;
-
+    @Column(name = "reg_date")
+    private String regDate;
 }

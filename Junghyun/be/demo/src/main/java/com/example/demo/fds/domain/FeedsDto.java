@@ -17,4 +17,5 @@ public class FeedsDto implements Serializable {
     private String content;
     private String addLocation;
     private String hashTag;
+    private String regDate;
 }
