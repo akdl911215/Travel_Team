@@ -8,45 +8,16 @@ import com.example.demo.fds.repository.FeedsBoardRepository;
 
 import org.springframework.stereotype.Service;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-@Data
-@RequiredArgsConstructor
+
+@AllArgsConstructor
 @Service
 public class FeedsBoardServiceImpl extends AbstractService<Feeds> implements FeedsBoardService {
 
-    private final FeedsBoardRepository fBoardRepo;
-
-	@Override
-	public void register(Feeds feed) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Feeds read(Long feed) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void modify(Feeds feed) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void remove(Long feedsNo) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<Feeds> list() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    private final FeedsBoardRepository repo;
 
 	@Override
 	public long count() {
@@ -75,7 +46,7 @@ public class FeedsBoardServiceImpl extends AbstractService<Feeds> implements Fee
 	@Override
 	public Feeds save(Feeds entity) {
 		// TODO Auto-generated method stub
-		return null;
+		return repo.save(entity);
 	}
 
 

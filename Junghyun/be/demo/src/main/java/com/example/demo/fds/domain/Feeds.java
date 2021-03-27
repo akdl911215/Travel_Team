@@ -4,9 +4,10 @@ import javax.persistence.*;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
+@Getter
 @Entity
 @NoArgsConstructor
 @Table(name = "feeds")
@@ -28,4 +29,19 @@ public class Feeds {
     private String hashTag;
     @Column(name = "reg_date")
     private String regDate;
+    
+    @Builder
+	public Feeds(long feedNo, String title, String writer, String content, String addLocation, String hashTag,
+			String regDate) {
+		super();
+		this.feedNo = feedNo;
+		this.title = title;
+		this.writer = writer;
+		this.content = content;
+		this.addLocation = addLocation;
+		this.hashTag = hashTag;
+		this.regDate = regDate;
+	}
+    
+    
 }
